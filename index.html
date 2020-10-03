@@ -1,102 +1,75 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title> Teste Lista</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Teste Lista</title>
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <div id="myDIV" class="header">
+      <h2 style="margin: 5px">Lista</h2>
+      <input type="text" id="entrada" placeholder="digite " />
+      <span onclick="adicionar()" class="addBtn">Add</span>
+    </div>
 
-	<div class="content">
-		
-		<div class="row">
-			
-			<div class="col=12">
-				<h1> lista teste</h1>
-				<form>
-					<input type="text" name="task" id="task"
-					placeholder="novo Item..." />
-					<input type="button" 
-						name=""
-						onclick="addTask();"
-						value='add'/>
+    <ul id="lista"></ul>
 
-				</form>
+    <script>
+      var lista = document.getElementsByTagName("LI");
+      var i;
+      for (i = 0; i < lista.length; i++) {
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        lista[i].appendChild(span);
+      }
 
-			</div>
+      var fechar = document.getElementsByClassName("fechar");
+      var i;
+      for (i = 0; i < fechar.length; i++) {
+        fechar[i].onclick = function () {
+          var div = this.parentElement;
+          div.style.display = "none";
+        };
+      }
 
-		</div>
+      var list = document.querySelector("ul");
+      list.addEventListener(
+        "click",
+        function (marcado) {
+          if (marcado.target.tagName === "LI") {
+            marcado.target.classList.toggle("checked");
+          }
+        },
+        false
+      );
 
-		<div class="row">
-			<div class="col-12">
+      function adicionar() {
+        var li = document.createElement("li");
+        var inputV = document.getElementById("entrada").value;
+        var t = document.createTextNode(inputV);
+        li.appendChild(t);
+        if (inputV === "") {
+          alert("Não digitou nada pq ???");
+        } else {
+          document.getElementById("lista").appendChild(li);
+        }
+        document.getElementById("entrada").value = "";
 
-				<div class="to=do-list-box">
-					<ul id="myList">
-						
-					</ul>
-					
-				</div>
-				
-			</div>
-		</div>
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\        remove");
+        span.className = "fechar";
+        span.appendChild(txt);
+        li.appendChild(span);
 
-	</div>
-
-	<script type="text/javascript">
-		var ul = document.getElementById("myList");
-		var li;
-		var itemId;
-		var item;
-
-		addTask = function() {
-
-			if(document.getElementById("task").value != ""){
-
-				item = document.getElementById("task");
-				
-				itemId = ul.childElementCount;
-				
-				li = createItemEl(item.value, itemId);
-
-				li.appendChild(createRemoveTaskBtn(itemId));
-
-				ul.appendChild(li);
-
-				task.focus();
-				task.value = "";
-
-			}
-		}
-
-		removeTask = function( itemId ) {
-
-			for( var i = 0 ; i < ul.children.length; i++){
-				if(ul.children[i].getAttribute("index") == itemId){
-
-					ul.children[i].remove();
-
-				}
-			}
-
-		}
-
-		createItemEl = function(itemValue, itemId) {
-
-			let li = document.createElement("li");
-
-			li.setAttribute("index", itemId); //passado como atributo
-
-			li.appendChild(document.createTextNode(itemValue));// pegando o valor dentro da caixa de texto e passando para esta lista
-			return li;
-
-		}
-
-		createRemoveTaskBtn= function(itemId){
-			let btn = document.createElement("button");
-			btn.setAttribute("onclick", "removeTask("+itemId+")");
-			btn.innerHTML = "X remove";
-			return btn;
-		}
-	</script>
-
-</body>
+        for (i = 0; i < fechar.length; i++) {
+          fechar[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+          };
+        }
+      }
+    </script>
+  </body>
 </html>
