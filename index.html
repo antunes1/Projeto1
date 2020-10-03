@@ -19,7 +19,7 @@
       var i;
       for (i = 0; i < lista.length; i++) {
         var span = document.createElement("SPAN");
-        var txt = document.createTextNode("\u00D7");
+        var txt = document.createTextNode("fechar");
         span.className = "close";
         span.appendChild(txt);
         lista[i].appendChild(span);
@@ -33,17 +33,6 @@
           div.style.display = "none";
         };
       }
-
-      var list = document.querySelector("ul");
-      list.addEventListener(
-        "click",
-        function (marcado) {
-          if (marcado.target.tagName === "LI") {
-            marcado.target.classList.toggle("checked");
-          }
-        },
-        false
-      );
 
       function adicionar() {
         var li = document.createElement("li");
